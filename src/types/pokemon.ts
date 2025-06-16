@@ -205,3 +205,8 @@ export interface Result {
     name: string;
     url:  string;
 }
+
+export interface SizedResult extends Result{
+    image : string;
+    isFav : boolean;
+}
