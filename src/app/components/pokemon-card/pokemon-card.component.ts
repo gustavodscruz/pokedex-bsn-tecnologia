@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { SizedResult } from 'src/types/pokemon';
 import {
   IonImg,
@@ -11,6 +11,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FavoritesService } from '../favorites/favorites.service';
+import { PokemonService } from 'src/app/services/pokemon.service';
 
 @Component({
   selector: 'app-pokemon-card',
@@ -30,21 +31,25 @@ export class PokemonCardComponent implements OnInit {
   @Input() pokemon!: SizedResult;
   constructor(
     private favoritesService: FavoritesService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef,
+    private pokemonService: PokemonService
   ) {}
 
   ngOnInit() {}
 
-  async toggleFav(pokemon: SizedResult) {
-    console.log("Estou tentando favoritar (ou nao) esse pokemon!")
+  async toggleFav(pokemon: SizedResult, event?: Event) {
+    event?.stopPropagation();
     if (!pokemon.isFav) {
-      console.log("Estou tentando favoritar!")
+      pokemon.isFav = true;
+      this.pokemonService.updateCachedPokemon(pokemon);
       await this.favoritesService.addFavorite(pokemon.name);
-      pokemon.isFav = !pokemon.isFav;
     } else {
-      this.favoritesService.removeFavorite(pokemon.name);
-      pokemon.isFav = !pokemon.isFav;
+      pokemon.isFav = false;
+      this.pokemonService.updateCachedPokemon(pokemon);
+      await this.favoritesService.removeFavorite(pokemon.name);
     }
+    this.cdr.detectChanges();
   }
 
   openPokemonDetails(name: string) {

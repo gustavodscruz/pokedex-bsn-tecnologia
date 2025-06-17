@@ -51,4 +51,8 @@ export class PokemonService {
       shareReplay(1)
     );
   }
+
+  updateCachedPokemon(pokemon: SizedResult) {
+    this.pokemonCache.set(pokemon.name, pokemon);
+  }
 }
