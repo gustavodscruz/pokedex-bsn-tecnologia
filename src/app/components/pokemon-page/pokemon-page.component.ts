@@ -1,3 +1,4 @@
+import { PokemonService } from './../../services/pokemon.service';
 import { POKEMON_COLOR_TYPES } from './../../../types/pokemon-color-types';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -22,19 +23,13 @@ export class PokemonPageComponent implements OnInit {
 
   pokemon!: Pokemon;
 
-  constructor() {
-    this.loadPokemonDetails()
+  constructor(
+    private pokemonService : PokemonService 
+  ) {
+    if (this.name) this.pokemonService.loadPokemonDetails(this.name)
   }
 
-  loadPokemonDetails() {
-    if (!this.name) return;
-    this.http
-      .get<Pokemon>(`https://pokeapi.co/api/v2/pokemon/${this.name}`)
-      .subscribe((data) => {
-        this.pokemon = data;
-        this.loading = false;
-      });
-  }
+  
 
   getTypeColor(type : string) : string {
     return POKEMON_COLOR_TYPES[type as keyof typeof POKEMON_COLOR_TYPES ] || '#777777';

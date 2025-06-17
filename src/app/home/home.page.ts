@@ -33,6 +33,9 @@ export class HomePage {
 
   users: any[] = [];
 
+  constructor() {
+    this.loadPokemons(this.apiUrl);
+  }
   pokemons!: SizedResult[];
 
   apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=20&offset=0';
@@ -40,9 +43,6 @@ export class HomePage {
   nextPageUrl: string | null = null;
   prevPageUrl: string | null = null;
 
-  constructor() {
-    this.loadPokemons(this.apiUrl);
-  }
 
   loadPokemons(url: string) {
     this.http.get<PokemonShorted>(url).subscribe((res) => {
