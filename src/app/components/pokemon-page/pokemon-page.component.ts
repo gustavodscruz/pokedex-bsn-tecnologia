@@ -1,0 +1,46 @@
+import { POKEMON_COLOR_TYPES } from './../../../types/pokemon-color-types';
+import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { Component, inject, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonLabel, IonImg, IonChip, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButtons, IonBackButton, IonSpinner } from '@ionic/angular/standalone';
+import { Pokemon } from 'src/types/pokemon';
+
+
+@Component({
+  selector: 'app-pokemon-page',
+  templateUrl: './pokemon-page.component.html',
+  styleUrls: ['./pokemon-page.component.scss'],
+  imports: [IonSpinner, IonBackButton, IonButtons, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonChip, IonImg, IonLabel, IonContent, IonHeader, IonToolbar, IonTitle, CommonModule],
+})
+export class PokemonPageComponent implements OnInit {
+  route = inject(ActivatedRoute);
+  http = inject(HttpClient);
+
+  name = this.route.snapshot.paramMap.get('name');
+  loading = true;
+
+  pokemon!: Pokemon;
+
+  constructor() {
+    this.loadPokemonDetails()
+  }
+
+  loadPokemonDetails() {
+    if (!this.name) return;
+    this.http
+      .get<Pokemon>(`https://pokeapi.co/api/v2/pokemon/${this.name}`)
+      .subscribe((data) => {
+        this.pokemon = data;
+        this.loading = false;
+      });
+  }
+
+  getTypeColor(type : string) : string {
+    return POKEMON_COLOR_TYPES[type as keyof typeof POKEMON_COLOR_TYPES ] || '#777777';
+  }
+
+  
+
+  ngOnInit() {}
+}

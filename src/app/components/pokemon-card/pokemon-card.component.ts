@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { SizedResult } from 'src/types/pokemon';
 import {
   IonImg,
@@ -9,6 +9,7 @@ import {
   IonCardTitle,
 } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pokemon-card',
@@ -30,7 +31,14 @@ export class PokemonCardComponent implements OnInit {
 
   ngOnInit() {}
 
+  router = inject(Router)
+
   toggleFav(pokemon: SizedResult) {
     pokemon.isFav = !pokemon.isFav;
+  }
+
+  openPokemonDetails(name : string){
+    if (!name) return;
+    this.router.navigate(['/pokemon', name])
   }
 }

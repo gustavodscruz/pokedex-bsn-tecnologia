@@ -1,0 +1,39 @@
+<ion-buttons slot="start">
+  <ion-back-button defaultHref="/"></ion-back-button>
+</ion-buttons>
+
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Pokedex </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-spinner *ngIf="loading" name="crescent" class="spinner-center"></ion-spinner>
+
+  @if (pokemon) {
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        {{ pokemon.name | titlecase }}
+      </ion-card-title>
+      <ion-card-content>
+        <ion-img [src]="pokemon.sprites.front_default" [alt]="pokemon.name">
+        </ion-img>
+        <ion-label>
+          @for (pokeType of pokemon.types; track pokeType.slot) {
+          <ion-chip [style.background-color]="getTypeColor(pokeType.type.name)">
+            {{ pokeType.type.name | titlecase }}
+          </ion-chip>
+          }
+        </ion-label>
+        <ion-label>Peso: {{ pokemon.weight }}</ion-label>
+        <ion-label>Altura: {{ pokemon.height }}</ion-label>
+      </ion-card-content>
+    </ion-card-header>
+  </ion-card>
+  } @else {
+    <ion-title>Infelizmente esse pokémon se encontra indisponível!</ion-title>
+  }
+</ion-content>

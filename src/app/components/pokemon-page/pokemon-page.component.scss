@@ -1,0 +1,22 @@
+ion-card {
+  max-width: 300px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+ion-img {
+  width: 150px;
+  margin: 0 auto;
+}
+
+ion-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+ion-chip {
+  margin: 5px;
+}
+
