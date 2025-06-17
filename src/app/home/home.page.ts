@@ -11,12 +11,13 @@ import {
   IonItem,
   IonImg, IonRow, IonButton, IonGrid, IonCol, IonCard, IonCardHeader, IonCardTitle, IonIcon } from '@ionic/angular/standalone';
 import { Pokemon, PokemonShorted, Result, SizedResult } from 'src/types/pokemon';
+import { PokemonCardComponent } from "../components/pokemon-card/pokemon-card.component";
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonIcon, IonCardTitle, IonCardHeader, IonCard, IonCol, IonGrid, IonButton, IonRow, 
+  imports: [IonIcon, IonCardTitle, IonCardHeader, IonCard, IonCol, IonGrid, IonButton, IonRow,
     IonImg,
     IonItem,
     IonLabel,
@@ -25,8 +26,7 @@ import { Pokemon, PokemonShorted, Result, SizedResult } from 'src/types/pokemon'
     IonTitle,
     IonContent,
     FormsModule,
-    CommonModule,
-  ],
+    CommonModule, PokemonCardComponent],
 })
 export class HomePage {
   http = inject(HttpClient);
@@ -72,7 +72,5 @@ export class HomePage {
     }
   }
 
-  toggleFav(pokemon : SizedResult){
-    pokemon.isFav = !pokemon.isFav
-  }
+
 }

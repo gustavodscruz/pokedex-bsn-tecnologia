@@ -1,0 +1,9 @@
+<ion-card>
+  <ion-img [src]="pokemon.image" alt="{{ pokemon.name }}" />
+  <ion-button fill="clear" (click)="toggleFav(pokemon)">
+    <ion-icon [name]="pokemon.isFav ? 'star-sharp' : 'star-outline'"></ion-icon>
+  </ion-button>
+  <ion-card-header>
+    <ion-card-title>{{ pokemon.name | titlecase }}</ion-card-title>
+  </ion-card-header>
+</ion-card>

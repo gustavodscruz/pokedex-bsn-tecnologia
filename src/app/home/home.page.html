@@ -9,17 +9,7 @@
     <ion-row class="ion-justify-content-center">
       @for (pokemon of pokemons; track pokemon.name) {
       <ion-col size="6" sizeMd="3" sizeLg="2">
-        <ion-card>
-          <ion-img [src]="pokemon.image" alt="{{ pokemon.name }}" />
-          <ion-button fill="clear" (click)="toggleFav(pokemon)">
-            <ion-icon
-              [name]="pokemon.isFav ? 'star-sharp' : 'star-outline'"
-            ></ion-icon>
-          </ion-button>
-          <ion-card-header>
-            <ion-card-title>{{ pokemon.name | titlecase }}</ion-card-title>
-          </ion-card-header>
-        </ion-card>
+        <app-pokemon-card [pokemon]="pokemon"></app-pokemon-card>
       </ion-col>
       } @empty {
       <ion-item class="home-container">
