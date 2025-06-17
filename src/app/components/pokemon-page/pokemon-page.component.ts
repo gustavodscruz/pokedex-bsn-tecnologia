@@ -26,7 +26,7 @@ export class PokemonPageComponent implements OnInit {
   constructor(
     private pokemonService : PokemonService 
   ) {
-    if (this.name) this.pokemonService.loadPokemonDetails(this.name)
+    this.loadPokemonData()
   }
 
   
@@ -35,7 +35,24 @@ export class PokemonPageComponent implements OnInit {
     return POKEMON_COLOR_TYPES[type as keyof typeof POKEMON_COLOR_TYPES ] || '#777777';
   }
 
-  
+  private loadPokemonData() {
+    if (this.name) {
+      this.loading = true;
+      this.pokemonService.loadPokemonDetails(this.name).subscribe({
+        next: (value) => {
+          if (value) {
+            this.pokemon = value;
+          }
+        },
+        error: (error) => {
+          console.error('Error loading pokemon:', error);
+        },
+        complete: () => {
+          this.loading = false;
+        }
+      });
+    }
+  }
 
   ngOnInit() {}
 }
