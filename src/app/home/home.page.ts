@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   IonHeader,
@@ -9,16 +9,28 @@ import {
   IonContent,
   IonLabel,
   IonItem,
-  IonImg, IonRow, IonButton, IonGrid, IonCol, IonCard, IonCardHeader, IonCardTitle, IonIcon } from '@ionic/angular/standalone';
-import { Pokemon, PokemonShorted, Result, SizedResult } from 'src/types/pokemon';
-import { PokemonCardComponent } from "../components/pokemon-card/pokemon-card.component";
+  IonRow,
+  IonButton,
+  IonGrid,
+  IonCol,
+ 
+} from '@ionic/angular/standalone';
+import {
+  Result,
+  SizedResult,
+} from 'src/types/pokemon';
+import { PokemonCardComponent } from '../components/pokemon-card/pokemon-card.component';
+import { PokemonService } from '../services/pokemon.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonIcon, IonCardTitle, IonCardHeader, IonCard, IonCol, IonGrid, IonButton, IonRow,
-    IonImg,
+  imports: [
+    IonCol,
+    IonGrid,
+    IonButton,
+    IonRow,
     IonItem,
     IonLabel,
     IonHeader,
@@ -26,14 +38,15 @@ import { PokemonCardComponent } from "../components/pokemon-card/pokemon-card.co
     IonTitle,
     IonContent,
     FormsModule,
-    CommonModule, PokemonCardComponent],
+    CommonModule,
+    PokemonCardComponent,
+],
 })
 export class HomePage {
-  http = inject(HttpClient);
-
-  users: any[] = [];
-
-  constructor() {
+  constructor(
+    private pokemonService: PokemonService,
+    private http: HttpClient
+  ) {
     this.loadPokemons(this.apiUrl);
   }
   pokemons!: SizedResult[];
@@ -43,18 +56,21 @@ export class HomePage {
   nextPageUrl: string | null = null;
   prevPageUrl: string | null = null;
 
-
   loadPokemons(url: string) {
-    this.http.get<PokemonShorted>(url).subscribe((res) => {
+    this.pokemonService.loadPokemons(url).subscribe((res) => {
       this.nextPageUrl = res.next;
       this.prevPageUrl = res.previous;
       this.pokemons = res.results.map((poke: Result) => {
+        const cached = this.pokemonService.getCachedPokemon(poke.name);
+        if (cached) {
+          return cached;
+        }
         const id = poke.url.split('/').filter(Boolean).pop();
         return {
           name: poke.name,
           image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`,
           url: poke.url,
-          isFav : false
+          isFav: false,
         };
       });
     });
@@ -71,6 +87,4 @@ export class HomePage {
       this.loadPokemons(this.prevPageUrl);
     }
   }
-
-
 }

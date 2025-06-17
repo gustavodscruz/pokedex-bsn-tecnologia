@@ -1,0 +1,40 @@
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="home" [routerLink]="['/tabs/home']">
+      <ion-icon name="home"></ion-icon>
+      <ion-label>Home</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="favorites" [routerLink]="['/tabs/favorites']">
+      <ion-icon name="star"></ion-icon>
+      <ion-label>Favoritos</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+
+<!-- <ion-tabs>
+  <ion-content [fullscreen]="true">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>
+          {{ selectedTab === 'home' ? 'Pokedex' : 'Favoritos' }}
+        </ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ng-container *ngIf="selectedTab === 'home'">
+      <app-home></app-home>
+    </ng-container>
+    <ng-container *ngIf="selectedTab === 'favorites'">
+      <app-favorites></app-favorites>
+    </ng-container>
+  </ion-content>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="home" (click)="selectedTab = 'home'">
+      <ion-icon name="home"></ion-icon>
+      <ion-label>Home</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="favorites" (click)="selectedTab = 'favorites'">
+      <ion-icon name="star"></ion-icon>
+      <ion-label>Favoritos</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs> -->

@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { SizedResult } from 'src/types/pokemon';
 import {
   IonImg,
@@ -10,6 +10,7 @@ import {
 } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { FavoritesService } from '../favorites/favorites.service';
 
 @Component({
   selector: 'app-pokemon-card',
@@ -27,18 +28,27 @@ import { Router } from '@angular/router';
 })
 export class PokemonCardComponent implements OnInit {
   @Input() pokemon!: SizedResult;
-  constructor() {}
+  constructor(
+    private favoritesService: FavoritesService,
+    private router: Router
+  ) {}
 
   ngOnInit() {}
 
-  router = inject(Router)
-
-  toggleFav(pokemon: SizedResult) {
-    pokemon.isFav = !pokemon.isFav;
+  async toggleFav(pokemon: SizedResult) {
+    console.log("Estou tentando favoritar (ou nao) esse pokemon!")
+    if (!pokemon.isFav) {
+      console.log("Estou tentando favoritar!")
+      await this.favoritesService.addFavorite(pokemon.name);
+      pokemon.isFav = !pokemon.isFav;
+    } else {
+      this.favoritesService.removeFavorite(pokemon.name);
+      pokemon.isFav = !pokemon.isFav;
+    }
   }
 
-  openPokemonDetails(name : string){
+  openPokemonDetails(name: string) {
     if (!name) return;
-    this.router.navigate(['/pokemon', name])
+    this.router.navigate(['/pokemon', name]);
   }
 }

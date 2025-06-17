@@ -1,3 +1,15 @@
-<p>
-  favorites works!
-</p>
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      @for (pokemon of favoritos; track pokemon.name) {
+      <ion-col size="6" sizeMd="3" sizeLg="2">
+        <app-pokemon-card [pokemon]="pokemon"></app-pokemon-card>
+      </ion-col>
+      } @empty {
+      <ion-item class="home-container">
+        <ion-label>Nenhum pokemon!</ion-label>
+      </ion-item>
+      }
+    </ion-row>
+  </ion-grid>
+</ion-content>

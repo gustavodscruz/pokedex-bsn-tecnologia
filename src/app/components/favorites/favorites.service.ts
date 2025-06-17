@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { BehaviorSubject } from 'rxjs';
-import { PokemonService } from 'src/app/services/pokemon.service';
+// import { PokemonService } from 'src/app/services/pokemon.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +15,7 @@ export class FavoritesService {
 
   constructor(
     private storageCtrl: Storage,
-    private pokemonService: PokemonService
+    // private pokemonService: PokemonService
   ) {
     this.init();
   }
@@ -34,8 +34,10 @@ export class FavoritesService {
   }
 
   async addFavorite(name: string) {
+    console.log("Favoritando no serviço!")
     const current = this.favoritesSubject.value;
     if (!current.includes(name)) {
+      console.log("Favoritando realmente no serviço !")
       const updated = [...current, name];
       this.updateFavorites(updated);
     }
@@ -46,9 +48,9 @@ export class FavoritesService {
     this.updateFavorites(updated);
   }
 
-  getPokemonObservables() {
-    return this.favoritesSubject.value.map((name) =>
-      this.pokemonService.loadPokemonDetails(name)
-    );
-  }
+  // getPokemonObservables() {
+  //   return this.favoritesSubject.value.map((name) =>
+  //     this.pokemonService.loadPokemonDetails(name)
+  //   );
+  // }
 }

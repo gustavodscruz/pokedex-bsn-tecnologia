@@ -15,8 +15,6 @@ import { Pokemon } from 'src/types/pokemon';
   imports: [IonSpinner, IonBackButton, IonButtons, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonChip, IonImg, IonLabel, IonContent, IonHeader, IonToolbar, IonTitle, CommonModule],
 })
 export class PokemonPageComponent implements OnInit {
-  route = inject(ActivatedRoute);
-  http = inject(HttpClient);
 
   name = this.route.snapshot.paramMap.get('name');
   loading = true;
@@ -24,6 +22,8 @@ export class PokemonPageComponent implements OnInit {
   pokemon!: Pokemon;
 
   constructor(
+    private route : ActivatedRoute,
+    private http : HttpClient,
     private pokemonService : PokemonService 
   ) {
     this.loadPokemonData()
