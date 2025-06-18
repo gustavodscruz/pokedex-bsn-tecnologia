@@ -1,12 +1,20 @@
-<ion-header [translucent]="true" > 
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title> {{ title }} </ion-title>
-    <!-- <ion-searchbar animated="true" placeholder="Animated"></ion-searchbar> -->
+    <div class="toolbar-row">
+      <ion-title>{{ title }}</ion-title>
+      <div class="small-searchbar">
+        <ion-searchbar
+          animated="true"
+          placeholder="Animated"
+          show-clear-button="focus"
+        ></ion-searchbar>
+      </div>
+    </div>
   </ion-toolbar>
 </ion-header>
 
 @if(!isInHome){
-  <ion-buttons slot="start">
-    <ion-back-button defaultHref="/"></ion-back-button>
-  </ion-buttons>
+<ion-buttons slot="start">
+  <ion-back-button defaultHref="/"></ion-back-button>
+</ion-buttons>
 }

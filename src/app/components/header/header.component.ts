@@ -20,7 +20,7 @@ import { filter } from 'rxjs';
     IonTitle,
     IonToolbar,
     IonHeader,
-    IonSearchbar,
+    IonSearchbar
   ],
 })
 export class HeaderComponent implements OnInit {
