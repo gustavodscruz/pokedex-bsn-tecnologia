@@ -5,8 +5,10 @@
       <div class="small-searchbar">
         <ion-searchbar
           animated="true"
-          placeholder="Animated"
+          placeholder="Procure pelos pokemons!"
           show-clear-button="focus"
+          [debounce]="1000" 
+          (ionInput)="handleInput($event)"
         ></ion-searchbar>
       </div>
     </div>

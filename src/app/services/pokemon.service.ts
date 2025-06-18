@@ -17,42 +17,49 @@ export class PokemonService {
     this.storage = window.localStorage;
   }
 
-  loadPokemons(url : string) : Observable<PokemonShorted>{
+  loadPokemons(url: string): Observable<PokemonShorted> {
     return this.httpClient.get<PokemonShorted>(url).pipe(
-      tap(response => {
-        response.results.forEach(poke => {
+      tap((response) => {
+        response.results.forEach((poke) => {
           const id = poke.url.split('/').filter(Boolean).pop();
-          const sizedResult : SizedResult = {
+          const sizedResult: SizedResult = {
             name: poke.name,
             image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`,
-            url : poke.url,
-            isFav: false
+            url: poke.url,
+            isFav: false,
           };
           this.pokemonCache.set(poke.name, sizedResult);
         });
       })
-    )
+    );
   }
-  
-  getCachedPokemon(name : string) : SizedResult | undefined {
-    console.log("Trying to use getCachedPokemon method")
+
+  getCachedPokemon(name: string): SizedResult | undefined {
+    console.log('Trying to use getCachedPokemon method');
     return this.pokemonCache.get(name);
   }
 
-  getAllCachedPokemons() : SizedResult[]{
-    return Array.from(this.pokemonCache.values())
+  getAllCachedPokemons(): SizedResult[] {
+    return Array.from(this.pokemonCache.values());
   }
 
   loadPokemonDetails(name: string): Observable<Pokemon | null> {
-    return this.httpClient.get<Pokemon>(
-      `https://pokeapi.co/api/v2/pokemon/${name}`
-    ).pipe(
-      catchError(() => of(null)),
-      shareReplay(1)
-    );
+    return this.httpClient
+      .get<Pokemon>(`https://pokeapi.co/api/v2/pokemon/${name}`)
+      .pipe(
+        catchError(() => of(null)),
+        shareReplay(1)
+      );
   }
 
   updateCachedPokemon(pokemon: SizedResult) {
     this.pokemonCache.set(pokemon.name, pokemon);
+  }
+
+  searchCachedPokemons(query: string): SizedResult[] {
+    const lowerQuery = query.toLowerCase();
+    return Array.from(this.pokemonCache.values()).filter((pokemon) =>
+      pokemon.name.toLowerCase().includes(lowerQuery)
+    );
   }
 }

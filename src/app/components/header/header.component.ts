@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import {
   IonHeader,
@@ -27,6 +27,14 @@ export class HeaderComponent implements OnInit {
   title = 'Pokedex';
   isInHome = true;
   constructor(private router: Router) {}
+  @Output() searchResult = new EventEmitter<string>();
+
+  handleInput(event: Event) {
+    const target = event.target as HTMLIonSearchbarElement;
+    const value = target.value?.toLowerCase() || '';
+    // this.results = this.data.filter((d) => d.toLowerCase().includes(query));
+    this.searchResult.emit(value);
+  }
 
   ngOnInit() {
     this.router.events

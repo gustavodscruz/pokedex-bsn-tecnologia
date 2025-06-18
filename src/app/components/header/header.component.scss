@@ -1,5 +1,5 @@
 .small-searchbar {
-  max-width: 200px;
+  max-width: max-content;
   margin-left: auto;
 }
 
@@ -11,7 +11,7 @@
 }
 
 ion-title {
-  width: calc(100% - 230px);
+  width: calc(100% - 500px);
 }
 ion-searchbar {
   --height: 32px;

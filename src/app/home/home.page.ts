@@ -13,15 +13,12 @@ import {
   IonButton,
   IonGrid,
   IonCol,
- 
 } from '@ionic/angular/standalone';
-import {
-  Result,
-  SizedResult,
-} from 'src/types/pokemon';
+import { Result, SizedResult } from 'src/types/pokemon';
 import { PokemonCardComponent } from '../components/pokemon-card/pokemon-card.component';
 import { PokemonService } from '../services/pokemon.service';
-import { HeaderComponent } from "../components/header/header.component";
+import { HeaderComponent } from '../components/header/header.component';
+import { PokemonSearchService } from '../services/pokemon-search/pokemon-search.service';
 
 @Component({
   selector: 'app-home',
@@ -41,17 +38,19 @@ import { HeaderComponent } from "../components/header/header.component";
     FormsModule,
     CommonModule,
     PokemonCardComponent,
-    HeaderComponent
-],
+    HeaderComponent,
+  ],
 })
 export class HomePage {
+  pokemons!: SizedResult[];
+  filteredPokemons!: SizedResult[];
   constructor(
     private pokemonService: PokemonService,
-    private http: HttpClient
+    private http: HttpClient,
+    private searchService: PokemonSearchService
   ) {
     this.loadPokemons(this.apiUrl);
   }
-  pokemons!: SizedResult[];
 
   apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=20&offset=0';
 
@@ -75,7 +74,16 @@ export class HomePage {
           isFav: false,
         };
       });
+      this.filteredPokemons = this.pokemons;
     });
+  }
+
+  onSearch(term : string){
+    if (!term){
+      this.filteredPokemons = this.pokemons;
+    } else {
+      this.filteredPokemons = this.searchService.search(term);
+    }
   }
 
   nextPage() {

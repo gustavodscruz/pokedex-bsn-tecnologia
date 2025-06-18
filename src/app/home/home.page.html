@@ -1,8 +1,8 @@
 <ion-content [fullscreen]="true" class="home-container">
-  <app-header></app-header>
+  <app-header (searchResult)="onSearch($event)" ></app-header>
   <ion-grid>
     <ion-row class="ion-justify-content-center">
-      @for (pokemon of pokemons; track pokemon.name) {
+      @for (pokemon of filteredPokemons; track pokemon.name) {
       <ion-col size="6" sizeMd="3" sizeLg="2">
         <app-pokemon-card [pokemon]="pokemon"></app-pokemon-card>
       </ion-col>
