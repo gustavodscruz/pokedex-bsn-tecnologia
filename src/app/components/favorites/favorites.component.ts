@@ -1,16 +1,17 @@
 import { SizedResult } from './../../../types/pokemon';
 import { Component, OnInit } from '@angular/core';
-import { IonItem, IonGrid, IonLabel, IonCol, IonRow, IonContent } from "@ionic/angular/standalone";
+import { IonItem, IonGrid, IonLabel, IonCol, IonRow, IonContent, IonHeader, IonToolbar, IonTitle } from "@ionic/angular/standalone";
 import { PokemonCardComponent } from "../pokemon-card/pokemon-card.component";
 import { FavoritesService } from './favorites.service';
 import { PokemonService } from 'src/app/services/pokemon.service';
 import { IonicStorageModule } from '@ionic/storage-angular';
+import { HeaderComponent } from "../header/header.component";
 
 @Component({
   selector: 'app-favorites',
   templateUrl: './favorites.component.html',
   styleUrls: ['./favorites.component.scss'],
-  imports: [IonContent, IonGrid, PokemonCardComponent, IonLabel, IonCol, IonRow, IonItem, IonicStorageModule],
+  imports: [IonTitle, IonToolbar, IonHeader, IonContent, IonGrid, PokemonCardComponent, IonLabel, IonCol, IonRow, IonItem, IonicStorageModule, HeaderComponent],
 })
 export class FavoritesComponent  implements OnInit {
 

@@ -1,15 +1,5 @@
-<ion-buttons slot="start">
-  <ion-back-button defaultHref="/"></ion-back-button>
-</ion-buttons>
-
-
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title> Pokedex </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true" class="ion-padding">
+<ion-content [fullscreen]="true">
+  <app-header></app-header>
   <ion-spinner *ngIf="loading" name="crescent" class="spinner-center"></ion-spinner>
 
   @if (pokemon) {

@@ -21,6 +21,7 @@ import {
 } from 'src/types/pokemon';
 import { PokemonCardComponent } from '../components/pokemon-card/pokemon-card.component';
 import { PokemonService } from '../services/pokemon.service';
+import { HeaderComponent } from "../components/header/header.component";
 
 @Component({
   selector: 'app-home',
@@ -40,6 +41,7 @@ import { PokemonService } from '../services/pokemon.service';
     FormsModule,
     CommonModule,
     PokemonCardComponent,
+    HeaderComponent
 ],
 })
 export class HomePage {

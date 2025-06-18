@@ -6,13 +6,14 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonLabel, IonImg, IonChip, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButtons, IonBackButton, IonSpinner } from '@ionic/angular/standalone';
 import { Pokemon } from 'src/types/pokemon';
+import { HeaderComponent } from "../header/header.component";
 
 
 @Component({
   selector: 'app-pokemon-page',
   templateUrl: './pokemon-page.component.html',
   styleUrls: ['./pokemon-page.component.scss'],
-  imports: [IonSpinner, IonBackButton, IonButtons, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonChip, IonImg, IonLabel, IonContent, IonHeader, IonToolbar, IonTitle, CommonModule],
+  imports: [IonSpinner, IonBackButton, IonButtons, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonChip, IonImg, IonLabel, IonContent, IonHeader, IonToolbar, IonTitle, CommonModule, HeaderComponent],
 })
 export class PokemonPageComponent implements OnInit {
 
