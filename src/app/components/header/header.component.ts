@@ -6,15 +6,14 @@ import {
   IonToolbar,
   IonTitle,
   IonButtons,
-  IonBackButton,
-} from '@ionic/angular/standalone';
+  IonBackButton, IonImg } from '@ionic/angular/standalone';
 import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  imports: [
+  imports: [IonImg, 
     IonBackButton,
     IonButtons,
     IonTitle,

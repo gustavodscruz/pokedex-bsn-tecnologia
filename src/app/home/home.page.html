@@ -1,5 +1,6 @@
 <ion-content [fullscreen]="true" class="home-container">
-  <app-header (searchResult)="onSearch($event)" ></app-header>
+  <app-header (searchResult)="onSearch($event)"></app-header>
+
   <ion-grid>
     <ion-row class="ion-justify-content-center">
       @for (pokemon of filteredPokemons; track pokemon.name) {
@@ -7,14 +8,18 @@
         <app-pokemon-card [pokemon]="pokemon"></app-pokemon-card>
       </ion-col>
       } @empty {
-      <ion-item class="home-container">
-        <ion-label>Nenhum pokemon!</ion-label>
-      </ion-item>
+       <ion-col size="12">
+        <div class="empty-home">
+          <ion-icon name="search-outline" size="large"></ion-icon>
+          <ion-label>Nenhum Pokémon encontrado!</ion-label>
+          <p>Tente outro nome ou verifique a ortografia.</p>
+        </div>
+      </ion-col>
       }
     </ion-row>
   </ion-grid>
 
-  <ion-row class="ion-justify-content-center ion-margin-top">
+  <ion-row class="ion-justify-content-center ion-margin-top" *ngIf="!searchTerm">
     <ion-button (click)="prevPage()" [disabled]="!prevPageUrl"
       >Anterior</ion-button
     >

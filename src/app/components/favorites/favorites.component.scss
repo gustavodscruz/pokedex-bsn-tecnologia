@@ -1,0 +1,27 @@
+.empty-favorites {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 0 32px 0;
+  color: #888;
+  font-size: 1.1rem;
+  gap: 12px;
+}
+
+.empty-favorites ion-icon {
+  font-size: 48px;
+  color: #ffd600;
+  margin-bottom: 8px;
+}
+
+.empty-favorites ion-label {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.empty-favorites p {
+  margin: 0;
+  font-size: 1rem;
+  color: #aaa;
+}

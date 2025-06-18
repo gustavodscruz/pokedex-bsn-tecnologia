@@ -72,7 +72,6 @@ export class PokemonPageComponent implements OnInit {
         next: (value) => {
           if (value) {
             this.pokemon = value;
-            console.log(this.pokemon);
           }
         },
         error: (error) => {

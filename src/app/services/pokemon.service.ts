@@ -35,7 +35,6 @@ export class PokemonService {
   }
 
   getCachedPokemon(name: string): SizedResult | undefined {
-    console.log('Trying to use getCachedPokemon method');
     return this.pokemonCache.get(name);
   }
 

@@ -13,6 +13,7 @@ import {
   IonButton,
   IonGrid,
   IonCol,
+  IonIcon,
 } from '@ionic/angular/standalone';
 import { Result, SizedResult } from 'src/types/pokemon';
 import { PokemonCardComponent } from '../components/pokemon-card/pokemon-card.component';
@@ -25,6 +26,7 @@ import { PokemonSearchService } from '../services/pokemon-search/pokemon-search.
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   imports: [
+    IonIcon,
     IonCol,
     IonGrid,
     IonButton,
@@ -44,6 +46,7 @@ import { PokemonSearchService } from '../services/pokemon-search/pokemon-search.
 export class HomePage {
   pokemons!: SizedResult[];
   filteredPokemons!: SizedResult[];
+  searchTerm: string = '';
   constructor(
     private pokemonService: PokemonService,
     private http: HttpClient,
@@ -78,8 +81,9 @@ export class HomePage {
     });
   }
 
-  onSearch(term : string){
-    if (!term){
+  onSearch(term: string) {
+    this.searchTerm = term;
+    if (!term) {
       this.filteredPokemons = this.pokemons;
     } else {
       this.filteredPokemons = this.searchService.search(term);

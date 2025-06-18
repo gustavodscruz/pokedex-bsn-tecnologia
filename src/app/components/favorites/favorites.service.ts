@@ -34,10 +34,8 @@ export class FavoritesService {
   }
 
   async addFavorite(name: string) {
-    console.log("Favoritando no serviço!")
     const current = this.favoritesSubject.value;
     if (!current.includes(name)) {
-      console.log("Favoritando realmente no serviço !")
       const updated = [...current, name];
       this.updateFavorites(updated);
     }

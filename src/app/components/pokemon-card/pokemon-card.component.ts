@@ -32,7 +32,6 @@ export class PokemonCardComponent implements OnInit {
   constructor(
     private favoritesService: FavoritesService,
     private router: Router,
-    private cdr: ChangeDetectorRef,
     private pokemonService: PokemonService
   ) {}
 
@@ -49,7 +48,6 @@ export class PokemonCardComponent implements OnInit {
       this.pokemonService.updateCachedPokemon(pokemon);
       await this.favoritesService.removeFavorite(pokemon.name);
     }
-    this.cdr.detectChanges();
   }
 
   openPokemonDetails(name: string) {

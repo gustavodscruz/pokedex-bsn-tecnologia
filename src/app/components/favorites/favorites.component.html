@@ -7,9 +7,13 @@
         <app-pokemon-card [pokemon]="pokemon"></app-pokemon-card>
       </ion-col>
       } @empty {
-      <ion-item class="home-container">
-        <ion-label>Nenhum pokemon!</ion-label>
-      </ion-item>
+      <ion-col size="12">
+        <div class="empty-favorites">
+          <ion-icon name="star-outline" size="large"></ion-icon>
+          <ion-label>Nenhum Pokémon favoritado ainda!</ion-label>
+          <p>Toque na estrela de um card para adicionar aos favoritos.</p>
+        </div>
+      </ion-col>
       }
     </ion-row>
   </ion-grid>
