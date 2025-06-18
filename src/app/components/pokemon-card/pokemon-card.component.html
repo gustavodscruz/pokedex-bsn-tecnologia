@@ -4,6 +4,6 @@
     <ion-icon style="color: yellow;" [name]="pokemon.isFav ? 'star-sharp' : 'star-outline'"></ion-icon>
   </ion-button>
   <ion-card-header>
-    <ion-card-title>{{ pokemon.name | titlecase }}</ion-card-title>
+    <ion-card-title>{{ convertToPascalCase(pokemon.name) | titlecase }}</ion-card-title>
   </ion-card-header>
 </ion-card>

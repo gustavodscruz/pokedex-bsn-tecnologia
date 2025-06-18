@@ -54,4 +54,9 @@ export class PokemonCardComponent implements OnInit {
     if (!name) return;
     this.router.navigate(['/pokemon', name]);
   }
+
+   convertToPascalCase(nerdCaps : string){
+    const lista = nerdCaps.split('-')
+    return lista.join(' ')
+  }
 }
