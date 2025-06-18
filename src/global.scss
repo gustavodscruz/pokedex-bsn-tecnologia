@@ -42,3 +42,7 @@
     font-size: 14px !important;
   }
 }
+
+body, ion-content, ion-label, ion-card-title, ion-text {
+  color: var(--ion-color-primary) !important;
+}

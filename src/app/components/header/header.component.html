@@ -2,7 +2,7 @@
   <ion-toolbar>
     <div class="toolbar-row">
       <ion-title>{{ title }}</ion-title>
-      <ion-img src="assets/pokeball.png" style="height: 40px; width: 40px; object-fit: contain; margin-right: 10px;" />
+      <ion-img src="assets/pokeball.png" class="icon" />
       @if(isInHome){
         <div class="small-searchbar">
           <ion-searchbar
@@ -20,6 +20,6 @@
 
 @if(!isInHome){
 <ion-buttons slot="start">
-  <ion-back-button defaultHref="/"></ion-back-button>
+  <ion-back-button defaultHref="/" text="Voltar" ></ion-back-button>
 </ion-buttons>
 }

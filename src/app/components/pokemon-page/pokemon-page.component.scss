@@ -27,6 +27,7 @@ ion-card-content {
 
 ion-chip {
   margin: 0 5px;
+  font-weight: bold;
 }
 
 .subtitle {
@@ -69,3 +70,13 @@ ion-chip {
   text-align: center;
 }
 
+.status-table tr > td > span {
+  font-weight: 600;
+}
+
+.min-padding {
+  padding-right: 10px;
+}
+.m-top {
+  margin-top: 16px;
+}

@@ -23,7 +23,7 @@
           }
         </ion-label>
         <ion-row>
-          <ion-label style="padding-right: 10px;"
+          <ion-label class="min-padding"
             >Peso:
             {{ convertHectogramsToKilograms(pokemon.weight) }} kg</ion-label
           >
@@ -46,7 +46,7 @@
           >
           }
         </ion-row>
-        <ion-label class="subtitle" style="margin-top: 16px">Status</ion-label>
+        <ion-label class="subtitle m-top" >Status</ion-label>
         <table class="status-table">
           <tr>
             <th>Status</th>
@@ -57,7 +57,6 @@
             <td>
               <span
                 [style.color]="getColorOfStat(status.stat.name)"
-                style="font-weight: 600"
               >
                 {{ convertToPascalCase(status.stat.name) | titlecase }}
               </span>
