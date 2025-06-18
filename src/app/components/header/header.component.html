@@ -2,15 +2,17 @@
   <ion-toolbar>
     <div class="toolbar-row">
       <ion-title>{{ title }}</ion-title>
-      <div class="small-searchbar">
-        <ion-searchbar
-          animated="true"
-          placeholder="Procure pelos pokemons!"
-          show-clear-button="focus"
-          [debounce]="1000" 
-          (ionInput)="handleInput($event)"
-        ></ion-searchbar>
-      </div>
+      @if(isInHome){
+        <div class="small-searchbar">
+          <ion-searchbar
+            animated="true"
+            placeholder="Procure pelos pokemons!"
+            show-clear-button="focus"
+            [debounce]="1000" 
+            (ionInput)="handleInput($event)"
+          ></ion-searchbar>
+        </div>
+      }
     </div>
   </ion-toolbar>
 </ion-header>

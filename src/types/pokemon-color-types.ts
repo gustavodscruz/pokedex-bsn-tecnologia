@@ -18,3 +18,13 @@ export const POKEMON_COLOR_TYPES = {
 	steel: '#B7B7CE',
 	fairy: '#D685AD',
 };
+
+export const STATUS_COLORS = {
+  'hp': '#FF5959',             
+  'attack': '#F5AC78',         
+  'defense': '#9DB7F5',        
+  'special-attack': '#FA92B2',  
+  'special-defense': '#A7DB8D',
+  'speed': '#FAE078',          
+};
+

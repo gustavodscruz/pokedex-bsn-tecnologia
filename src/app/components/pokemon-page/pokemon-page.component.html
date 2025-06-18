@@ -1,12 +1,16 @@
 <ion-content [fullscreen]="true">
   <app-header></app-header>
-  <ion-spinner *ngIf="loading" name="crescent" class="spinner-center"></ion-spinner>
+  <ion-spinner
+    *ngIf="loading"
+    name="crescent"
+    class="spinner-center"
+  ></ion-spinner>
 
   @if (pokemon) {
-  <ion-card>
+  <ion-card >
     <ion-card-header>
       <ion-card-title>
-        {{ pokemon.name | titlecase }}
+        #{{ formatPokemonId(pokemon.id) }} {{ pokemon.name | titlecase }}
       </ion-card-title>
       <ion-card-content>
         <ion-img [src]="pokemon.sprites.front_default" [alt]="pokemon.name">
@@ -18,12 +22,56 @@
           </ion-chip>
           }
         </ion-label>
-        <ion-label>Peso: {{ pokemon.weight }}</ion-label>
-        <ion-label>Altura: {{ pokemon.height }}</ion-label>
+        <ion-row>
+          <ion-label style="padding-right: 10px;"
+            >Peso:
+            {{ convertHectogramsToKilograms(pokemon.weight) }} kg</ion-label
+          >
+          <ion-label
+            >Altura: {{ convertDecimetersToMeters(pokemon.height) }} m</ion-label
+          >
+        </ion-row>
+        @if(pokemon.abilities.length > 1){
+        <ion-label class="subtitle">Habilidades</ion-label>
+        } @else {
+        <ion-label class="subtitle">Habilidade</ion-label>
+        }
+        <ion-row>
+          @for (ability of pokemon.abilities; track $index) {
+
+          <ion-chip>
+            {{
+              convertToPascalCase(ability.ability!.name) | titlecase
+            }}</ion-chip
+          >
+          }
+        </ion-row>
+        <ion-label class="subtitle" style="margin-top: 16px">Status</ion-label>
+        <table class="status-table">
+          <tr>
+            <th>Status</th>
+            <th>Valor</th>
+          </tr>
+          @for (status of pokemon.stats; track $index) {
+          <tr>
+            <td>
+              <span
+                [style.color]="getColorOfStat(status.stat.name)"
+                style="font-weight: 600"
+              >
+                {{ convertToPascalCase(status.stat.name) | titlecase }}
+              </span>
+            </td>
+            <td>
+              {{ status.base_stat }}
+            </td>
+          </tr>
+          }
+        </table>
       </ion-card-content>
     </ion-card-header>
   </ion-card>
   } @else {
-    <ion-title>Infelizmente esse pokémon se encontra indisponível!</ion-title>
+  <ion-title>Infelizmente esse pokémon se encontra indisponível!</ion-title>
   }
 </ion-content>

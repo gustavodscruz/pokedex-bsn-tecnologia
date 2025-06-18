@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { PokemonShorted, Result, SizedResult } from 'src/types/pokemon';
 import { PokemonService } from '../pokemon.service';
+import { shareReplay } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,7 @@ export class PokemonSearchService {
   private loadPokemons() {
     this.httpClient
       .get<PokemonShorted>('assets/pokemons.json')
+      .pipe(shareReplay(1))
       .subscribe((data: PokemonShorted) => (this.localPokemons = data.results));
   }
 
@@ -34,7 +36,7 @@ export class PokemonSearchService {
           image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`,
           isFav: this.cacheService.getCachedPokemon(poke.name)?.isFav ?? false,
         };
-        this.cacheService.updateCachedPokemon(sizedResult); // adiciona ao cache
+        this.cacheService.updateCachedPokemon(sizedResult);
         return sizedResult;
       });
   }
