@@ -2,6 +2,8 @@
 
 Uma Pokédex moderna desenvolvida com Angular e Ionic, oferecendo uma interface responsiva e intuitiva para explorar o mundo Pokémon!
 
+[Vídeo demonstrativo da funcionalidade](https://www.youtube.com/watch?v=2c46CpqDnVE)
+
 ## 🎯 Abordagem Técnica
 
 ### Padrões de Design
